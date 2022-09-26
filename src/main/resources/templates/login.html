@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit New Post</title><link rel = "stylesheet" th:href = "@{/style.css}">
+    <img th:src="@{Greennit.png}" alt="" width="256" height="88"/>
+</head>
+<body>
+
+<h1>Log In Existing User</h1>
+
+<form style="float:top" th:action = "@{/login}" action = "#" method = "post">
+        <div class = "input-field">
+            <label for = "username">Username:</label>
+            <input type="username" id = "username" name = "username">
+        </div>
+        <div class = "input-field">
+            <label for = "password">Password:</label>
+            <input type="password" id = "password" name = "password">
+        </div>
+        <div class = "input-field">
+            <input type = "submit" value = "Log In">
+        </div>
+    </form>
+
+<div>            <button type="button" th:onclick="|window.location.href='/'|">Back to Main</button>         </div>
+
+</body>
+</html>

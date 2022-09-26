@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel = "stylesheet" th:href = "@{/style.css}">
+</head>
+<body>
+<img th:src="@{/Greennit.png}" alt="" width="256" height="88"/>
+
+<h2 th:text="'Hello ' +${user.username}+','"></h2>
+
+<h3 th:text="'There are: ' +${count} + ' posts'"></h3>
+<h3 th:text="'Showing only the first 5'"></h3>
+
+<form style="float:top" th:action = "@{/{id}/user(id=${user.id})}" action = "#" method = "post">
+    <div class = "input-field">
+        <label for = "pageNo">Page No:</label>
+        <input type="pageNo" id = "pageNo" name = "pageNo" placeholder="Suggested 1">
+    </div>
+    <div class = "input-field">
+        <label for = "pageSize">Posts per Page:</label>
+        <input type="pageSize" id = "pageSize" name = "pageSize" placeholder="Suggested 5">
+    </div>
+    <div class = "input-field">
+        <input type = "submit" value = "View">
+    </div>
+</form>
+
+<table style="float:top">
+    <th>
+        <form>
+            <div>            <button type="button" th:onclick="|window.location.href='/'|">Log Out</button>         </div>
+            <div>            <button type="button" th:onclick="|window.location.href='/'+${user.id}+'/submitNewPost'|">Submit New Post</button>         </div>
+
+        </form>
+    </th>
+
+</table>
+
+<table style="float:top">
+    <tr>
+        <th>Score</th>
+        <th>Vote +</th>
+        <th>Vote -</th>
+        <th>Title</th>
+        <th>User</th>
+        <th>Posted on</th>
+    </tr>
+    <div th:each="post : ${posts}" th:object="${post}">
+        <tr>
+            <td th:text="*{score}"></td>
+            <td> <button type="button" th:onclick="|window.location.href='/' + ${user.id} + '/' + ${post.id} + '/plusScore'|">+</button></td>
+            <td> <button type="button" th:onclick="|window.location.href='/' + ${user.id} + '/' + ${post.id} + '/minusScore'|">-</button></td>
+            <td>
+                <p th:text="*{title}"></p>
+                <img th:src="*{url}" alt="" width="192" height="108"/>
+
+            </td>
+            <td th:text="*{user} != null ? *{user.username} : 'Anonymous user'"></td>
+            <td th:text="*{dateCreated}"></td>
+        </tr>
+    </div>
+</table>
+
+</body>
+</html>

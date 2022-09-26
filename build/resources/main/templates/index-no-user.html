@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel = "stylesheet" th:href = "@{/style.css}">
+
+</head>
+<body>
+<img th:src="@{/Greennit.png}" alt="" width="256" height="88"/>
+
+
+<h2>Welcome to Greennit</h2>
+<h3>You can only post and vote when registered and logged in.</h3>
+
+<h4>Please register, it is free, for the moment.</h4>
+
+
+<table style="float:top">
+    <th>
+        <form>
+            <div>            <button type="button" th:onclick="|window.location.href='/login'|">Log In</button>         </div>
+            <div>            <button type="button" th:onclick="|window.location.href='/register'|">Register</button>         </div>
+        </form>
+    </th>
+
+</table>
+
+<table style="float:top">
+    <tr>
+        <th>Score</th>
+        <th>Vote +</th>
+        <th>Vote -</th>
+        <th>Title</th>
+        <th>User</th>
+        <th>Posted on</th>
+    </tr>
+    <div th:each="post : ${posts}" th:object="${post}">
+        <tr>
+            <td th:text="*{score}"></td>
+            <td> <button type="button" th:onclick="">+</button></td>
+            <td> <button type="button" th:onclick="">-</button></td>
+            <td th:text="*{title}"></td>
+            <td th:text="*{user} != null ? *{user.username} : 'Anonymous user'"></td>
+            <td th:text="*{dateCreated}"></td>
+        </tr>
+    </div>
+</table>
+
+</body>
+</html>
